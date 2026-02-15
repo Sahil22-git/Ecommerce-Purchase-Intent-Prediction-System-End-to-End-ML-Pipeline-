@@ -1,103 +1,152 @@
+📌 E-Commerce Purchase Intent Prediction System (End-to-End ML Pipeline)
+📖 Project Overview
 
+This project builds an end-to-end Machine Learning system to predict whether an e-commerce website session will result in a purchase.
 
-Ecommerce Purchase Intent Prediction System
-Project Overview
+The objective is to identify high-intent user sessions early so that businesses can trigger targeted marketing actions such as discount offers, chatbot assistance, or retargeting campaigns.
 
-This project builds an end-to-end machine learning system to predict whether a website session will result in a purchase. The goal is to help ecommerce platforms identify high intent users and trigger targeted marketing strategies such as discounts, recommendations or retargeting campaigns.
+The model is trained on real session-level behavioral data and optimized using business-driven threshold tuning.
 
-The dataset contains session level behavioral data including page visits, time spent, bounce rate and visitor type.
+🎯 Business Problem
 
-Business Problem
+In most e-commerce platforms, only a small percentage of sessions result in a purchase.
 
-Only ~15% of website sessions result in a purchase.
-Predicting high purchase intent sessions enables:
+In this dataset:
+
+15.47% sessions resulted in purchase
+
+84.53% sessions did not convert
+
+Predicting purchase intent enables:
 
 Targeted discount campaigns
 
-Improved conversion rates
+Conversion rate optimization
 
-Optimized marketing spend
+Improved marketing ROI
 
 Personalized user engagement
 
-Dataset Information
+Better revenue forecasting
 
-Source: Online Shoppers Purchasing Intention Dataset (Kaggle)
+📊 Dataset Information
 
-Rows: 12000 sessions
+Source: Kaggle – Online Shoppers Purchasing Intention Dataset
 
-Target Variable: Revenue (True/False)
+Total Records: ~12,000 sessions
+
+Target Variable: Revenue (True / False)
 
 Class Imbalance: 15.47% positive class
 
-Feature Engineering
+Each row represents a user session containing:
 
-The following engineered features were added:
+Product page visits
+
+Time spent on pages
+
+Bounce rate
+
+Exit rate
+
+Page monetary value
+
+Visitor type
+
+Weekend flag
+
+Traffic source
+
+🧠 Feature Engineering
+
+To improve predictive performance, additional behavioral interaction features were created:
 
 engagement_score = ProductRelated × ProductRelated_Duration
 
 value_intensity = PageValues × Administrative_Duration
 
-returning_user flag (encoded visitor type)
+returning_user_flag (encoded visitor type)
 
-These features enhanced behavioral signal detection.
+These engineered features improved behavioral signal detection and model performance.
 
-Model Development
-Step 1: Data Preprocessing
+⚙️ Modeling Approach
+1️⃣ Data Preprocessing
 
-Missing value check
+Missing value verification
 
-Standard scaling for numerical features
+Standard scaling of numerical features
 
-One hot encoding for categorical features
+One-hot encoding of categorical variables
 
-Stratified train test split
+Stratified train-test split (80/20)
 
-Step 2: Handling Class Imbalance
+2️⃣ Class Imbalance Handling
 
-Applied class_weight="balanced"
+Applied class_weight="balanced" to penalize minority class misclassification
 
-Step 3: Model Comparison
+3️⃣ Model Comparison
 
 Logistic Regression (baseline)
 
-Random Forest (non linear model)
+Random Forest (non-linear model)
 
-Model Performance
-Model	ROC-AUC	Recall (Purchase)
-Logistic Regression	0.896	0.75
-Random Forest	0.922	0.77
+📈 Model Performance
+Logistic Regression
 
-After threshold optimization (0.35):
+ROC-AUC: 0.896
 
-Recall improved to 0.85
+Recall (Purchase): 0.75
 
-Increased high intent session detection
+Random Forest
 
-Feature Importance Insights
+ROC-AUC: 0.922
 
-Top predictors:
+Recall (Purchase): 0.77
 
-PageValues (38%)
+🎯 Threshold Optimization
 
-value_intensity (14%)
+Instead of using the default 0.5 classification threshold, threshold tuning was applied to align with business objectives.
 
-ExitRates (6%)
+At threshold = 0.35:
 
-These insights align with expected user purchasing behavior.
+Recall improved from 0.77 → 0.85
 
-System Pipeline
+Increased detection of high-intent buyers
+
+Slight precision tradeoff (expected behavior)
+
+This demonstrates business-driven model decision making.
+
+🔍 Feature Importance Insights
+
+Top predictors influencing purchase probability:
+
+PageValues (38% importance)
+
+value_intensity (14% importance)
+
+ExitRates (6% importance)
+
+These insights align with real-world user behavior patterns:
+
+High-value page engagement strongly increases purchase likelihood
+
+Interaction-based features improved model strength
+
+High exit rates negatively impact conversion probability
+
+🏗 End-to-End System Pipeline
 
 User Session Data
 → Feature Engineering
 → Preprocessing Pipeline
 → Random Forest Model
 → Probability Output
-→ Threshold Decision
+→ Business Threshold Decision
 
-The final model was serialized using joblib for deployment readiness.
+The final pipeline was serialized using joblib for production readiness.
 
-Technologies Used
+🛠 Technologies Used
 
 Python
 
@@ -111,24 +160,54 @@ XGBoost
 
 Matplotlib / Seaborn
 
-VS Code + Jupyter Notebook
+VS Code
 
-Future Improvements
+Jupyter Notebook
 
-Hyperparameter tuning using advanced search
-
-SHAP explainability
-
-Streamlit deployment
-
-Real time API integration
-
-Project Structure
-
+📂 Project Structure
 ecommerce_purchase_prediction/
 │
 ├── data/
 ├── notebooks/
 ├── models/
+│   └── purchase_model.pkl
+├── src/
 └── README.md
 
+🚀 Future Improvements
+
+SHAP-based explainability
+
+Hyperparameter optimization using RandomizedSearchCV
+
+Streamlit deployment interface
+
+Real-time API integration
+
+A/B testing simulation for marketing impact
+
+💡 Key Learnings
+
+Handling imbalanced datasets effectively
+
+Model comparison and performance evaluation
+
+Threshold optimization for business objectives
+
+Importance of feature engineering in improving model performance
+
+Translating ML metrics into business impact
+
+📌 Final Outcome
+
+An end-to-end purchase intent prediction system achieving:
+
+ROC-AUC: 0.92
+
+Optimized Recall: 0.85
+
+Production-ready ML pipeline
+
+Business-aligned decision threshold
+
+This project demonstrates applied Machine Learning with practical business reasoning.
